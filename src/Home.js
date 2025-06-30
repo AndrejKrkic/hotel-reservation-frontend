@@ -18,7 +18,7 @@ const Home = () => {
 
       <div>
         <div className='imageClass'>
-          <img className='fullWidthImage' src={'https://us.images.westend61.de/0001894565pw/happy-cheerful-group-of-friends-having-breakfast-in-a-farmhouse-young-people-eating-in-the-garden-concepts-about-healthy-lifestyle-and-food-DMDF05718.jpg'} alt={'Full-width image'} />
+          <img className='fullWidthImage' src={'https://images.pexels.com/photos/1134176/pexels-photo-1134176.jpeg?cs=srgb&dl=pexels-boonkong-boonpeng-442952-1134176.jpg&fm=jpg'} alt={'Full-width image'} />
         </div>
 
       </div>
@@ -60,7 +60,7 @@ const Home = () => {
                 capacity={room.capacity}
                 description={room.description}
                 pricePerNight={room.pricePerNight}
-              //imageUrl={room.imageUrl} // URL slike sobe iz baze
+              imageUrl={room.imageUrl} // URL slike sobe iz baze
               />
             ))
           ) : (

@@ -2,11 +2,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RoomCard.css';
 
-const RoomCard = ({id, name, capacity, description, pricePerNight}) => {
+const RoomCard = ({id, name, capacity, description, pricePerNight, imageUrl}) => {
     const navigate = useNavigate();
   return (
     <div style={styles.card}>
-      <img src={'https://images.pexels.com/photos/1669799/pexels-photo-1669799.jpeg?cs=srgb&dl=pexels-fotoaibe-1669799.jpg&fm=jpg'} alt={name} style={styles.image} />
+      <img src={imageUrl} alt={name} style={styles.image} />
       <div className='cardDiv' style={styles.content}>
         <h3>{name}</h3>
         <p><strong>Kapacitet:</strong> {capacity} osoba</p>
