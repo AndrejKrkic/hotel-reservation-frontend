@@ -3,14 +3,15 @@ import React, { useEffect, useState } from 'react';
 
 import RoomCard from './Components/RoomCard';
 
+import { fetchRooms } from './api/roomService';
+
 const Home = () => {
   const [rooms, setRooms] = useState([]);
 
   useEffect(() => {
-    fetch('https://localhost:7172/api/Room') // Prilagodi URL
-      .then((response) => response.json())
-      .then((data) => setRooms(data))
-      .catch((error) => console.error('Error fetching rooms:', error));
+    fetchRooms()
+      .then(data => setRooms(data))
+      .catch(error => console.error('Error fetching rooms:', error));
   }, []);
 
   return (

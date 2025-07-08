@@ -2,6 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import {
+  getRoomById,
+  getOccupiedDates,
+  createReservation,
+  calculateReservationPrice
+} from '../api/roomService';
 
 const ReservationPage = () => {
   const { id } = useParams(); // Uzima ID sobe iz URL-a
@@ -22,23 +28,19 @@ const ReservationPage = () => {
 
   useEffect(() => {
     // Dohvatanje podataka o sobi sa servera
-    fetch(`https://localhost:7172/api/Room/${id}`)
-      .then((response) => response.json())
-      .then((data) => setRoom(data))
-      .catch((error) => console.error('Error fetching room:', error));
+    getRoomById(id)
+  .then(data => setRoom(data))
+  .catch(error => console.error('Greška pri dobijanju sobe:', error));
   }, [id]);
 
-  useEffect(() => {
-    // Dohvatanje zauzetih datuma
-    fetch(`https://localhost:7172/api/Reservations/occupied-dates/${id}`)
-    .then(response => response.json())
-    .then(data => {
-      // Transformacija datuma
-      const transformedDates = data.map(date => date.split('T')[0]); // Uzimamo samo "YYYY-MM-DD"
-      setReservedDates(transformedDates);
-    })
-    .catch(error => console.error('Greška prilikom dobijanja zauzetih datuma:', error));
-}, []);
+ useEffect(() => {
+    getOccupiedDates(id)
+      .then(data => {
+        const transformed = data.map(d => d.split('T')[0]);
+        setReservedDates(transformed);
+      })
+      .catch(error => console.error('Greška pri zauzetim datumima:', error));
+  }, [id]);
 
 const isDateReserved = (date) => {
     const dateString = date.toISOString().split('T')[0]; // Konvertujemo u "YYYY-MM-DD"
